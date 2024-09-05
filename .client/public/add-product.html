@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--=============== FLATICON ===============-->
+    <link 
+    rel='stylesheet' 
+    href='https://cdn-uicons.flaticon.com/2.3.0/uicons-regular-straight/css/uicons-regular-straight.css'
+   />
+
+    <!--=============== SWIPER CSS ===============-->
+    <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"]
+   />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="../assets/css/product.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link rel="stylesheet" href="../assets/css/add-product.css" />
+
+    <title>Bichinhos Ousados Store: Adicionar produto</title>
+  </head>
+  <body>
+    <!--=============== HEADER ===============-->
+   
+
+    <img src="../assets/img/loading.gif" alt="" class="loader">
+
+    <h1 class="title">Adicionar Produto</h1>
+
+    <div class="error">
+        <p>Ocorreu algum erro</p>
+    </div>
+    <!--=============== MAIN ===============-->
+    <main class="main">
+
+      <!--=============== DETAILS ===============-->
+      <section class="details section--lg">
+        <div class="details__container container grid">
+          <div class="details__group">
+            <!--=========== UPLOAD IMAGE SECTION =========-->
+            <div class="image-upload-container">
+                <input type="file" id="upload-image-0" accept="image/png, image/jpeg, image/jpg" hidden>
+                <label for="upload-image-0" class="upload-overlay">Adicionar Imagem</label>
+                <img class="product__img" src="img/noImage.jpeg" />
+            </div>
+            <!-- <div class="small__product-container flex">
+                <div class="small__product__img small grid">
+                    <input type="file" id="upload-image-1" accept="image/png, image/jpeg, image/jpg" hidden>
+                    <label for="upload-image-1" class="upload-overlay small">Adicionar Imagem</label>
+                    <img src="img/noImage.jpeg" />
+                </div>
+                <div class="small__product__img-2 small grid">
+                    <input type="file" id="upload-image-2" accept="image/png, image/jpeg, image/jpg" hidden>
+                    <label for="upload-image-2" class="upload-overlay small">Adicionar Imagem</label>
+                    <img src="img/noImage.jpeg" />
+                </div>
+                <div class="small__product__img-3 small grid">
+                    <input type="file" id="upload-image-3" accept="image/png, image/jpeg, image/jpg" hidden>
+                    <label for="upload-image-3" class="upload-overlay small">Adicionar Imagem</label>
+                    <img src="img/noImage.jpeg" />
+                </div>
+            </div> -->
+        </div>
+      
+          <div class="details__group">
+            <h3 class="details__title" contenteditable="true" data-placeholder="product name">Kit's Exclusivos</h3>
+            <p class="details__brand">Personalizáveis</p>
+      
+            <div class="details__price flex disable">
+              <div class="first__price"  >
+                <span class="new__price" contenteditable="true" data-placeholder="Novo Preço">R$199,90</span>
+                <span class="old__price" contenteditable="true" data-placeholder="Valor Antigo ">R$299,90</span>
+                <span class="save__price" contenteditable="true" data-placeholder="Desconto ">35% Off</span>
+              </div>
+            </div>
+            <p class="details__category" contenteditable="true" data-placeholder="Categoria">
+              Amigurumi
+            </p>
+            <p class="short__description" contenteditable="true" data-placeholder="Descrição curta">
+              Surpreenda no Dia dos Namorados com este kit encantador: inclui um cesto elegante, com buquê , enrolados e um porta-retrato. O presente perfeito para celebrar o amor com um toque diferente.
+            </p>
+            <div class="rating disable">
+                <img src="../assets/img/ios-star.svg" class="star" alt="">
+                <img src="../assets/img/ios-star.svg" class="star" alt="">
+                <img src="../assets/img/ios-star.svg" class="star" alt="">
+                <img src="../assets/img/ios-star.svg" class="star" alt="">
+                <img src="../assets/img/ios-star-outline.svg" class="star" alt="">
+                <span class="rating-count">4,023 avaliações</span>
+            </div>
+
+            <ul class="product__list">
+              <li class="list__item flex">
+                <i class="fi-rs-crown"></i> Da melhor qualidade e feito a mão
+              </li>
+
+              <li class="list__item flex">
+                <i class="fi-rs-refresh"></i> Qualidade Duradoura
+              </li>
+
+              <li class="list__item flex">
+                <i class="fi-rs-credit-card"></i> Aceitamos dinheiro na Entrega
+              </li>
+            </ul>
+
+            <!-- <div class="details__size flex">
+              <span class="details__size-title">Kit:</span>
+
+              <ul class="size__list">
+                <li>
+                  <a 
+                  href="#" 
+                  class="size__link" data-kit="1">1</a>
+                </li>
+
+                <li>
+                  <a 
+                  href="#" 
+                  class="size__link" data-kit="2">2</a>
+                </li>
+              </ul>
+            </div> -->
+
+            <div class="details__action disable">
+              <!-- <input type="number" class="quantity" value="3" /> -->
+
+              <a href="#" class="btn btn-sm">Adicionar Ao Carrinho</a>
+<!-- 
+              <a href="#" class="details__action-btn">
+                <i class="fi fi-rs-heart"></i>
+              </a> -->
+            </div>
+
+            <ul class="details__meta" contenteditable="true" data-placeholder="Tags, adicione tags para mais engajamento" >
+              <li class="meta__list flex"><span>SKU:</span> FWM15VKT</li>
+              <li class="meta__list flex">
+                <span>Tags:</span>Roupas, Femininas, Vestido
+              </li>
+              <li class="meta__list flex">
+                <span>Disponibilidade:</span> 8 itens no estoque
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="detail-des">
+        <h1 class="section-title">Detalhes</h1>
+        <p class="des" contenteditable="true" data-placeholder="Detalhes, podendo adicionar imagens utiluzando imagens HTML ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo accusantium, pellat, iste itaque, laudantium aperiam necessutatibus mollitia, pariatur molestiar</p>
+      </div>
+
+      <div class="btn-wrapper">
+        <button class="btn add-product-btn"> Adicionar Produto </button>
+        <button class="btn draft-btn">Salvar Rascunho</button>
+      </div>
+      </section>
+    </main>
+
+   
+
+    <!--=============== SWIPER JS ===============-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js">
+    </script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="../../assets/js/add-product.js"></script>
+    <script src="../../assets/js/common.js"></script>  
+  </body>
+</html>

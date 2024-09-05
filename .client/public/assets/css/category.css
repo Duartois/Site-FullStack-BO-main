@@ -1,0 +1,127 @@
+.category {
+    height: 100px;
+}
+
+.search__title {
+    margin:auto;
+}
+
+#category{
+    padding-block: 14rem;
+}
+
+.category .search__title span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    font-size: larger;
+    color:hsl(189, 96%, 36%);
+}
+.category__search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#search-btn img {
+    width: 20px;
+}
+
+#search-btn {
+    position: relative;
+    display: block;
+    right: -8px;
+    padding-inline: 1.5rem;
+    border: 1px solid var(--border-color-alt);
+    border-radius: 50%;
+    font-size: 10px;
+}
+
+.category__search .form__input {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 50px;
+    border-radius: 7.25rem;
+    font-size: 20px ;
+}
+.category__search input {
+    width: 50%;
+}
+
+
+#search-input::placeholder,
+.category__search .form__input {
+    padding-block: 2rem;
+}
+.form__input .placeholder {
+    justify-content: center;
+}
+.search__subtitle{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+}
+#search-subtitle{
+    padding-block: 2rem;
+    color: hsl(0, 0%, 50%);
+}
+#product-list{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 3rem;
+}
+
+#product-list .search-listing {
+    width: 100%;
+    height: auto;
+    padding: 60px 18vw;
+}
+@media screen and (max-width: 350px) {
+
+
+}
+
+
+@media screen and (max-width: 576px) {
+    h1.search__title {
+        display: flex;
+        justify-content: center;
+        width: 355px;
+    
+    }
+    .category__search .form__input {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #product-list.search-listing {
+        padding: 32px;
+    }
+    #product-list{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 3rem;
+}
+}
+@media screen and (max-width: 992px) {
+    #product-list.search-listing {
+        padding: 32px;
+    }
+    
+    
+}    
+
+@media screen and (max-width: 1200px) {
+    #product-list.search-listing {
+        padding: 32px;
+    }
+    .search-listing {
+        width: 100%;
+        height: auto;
+        padding: 60px 10vw;
+    }
+}
