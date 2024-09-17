@@ -474,31 +474,47 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 let DOMAIN = process.env.DOMAIN;
 
 app.post('/stripe-checkout', async (req, res) => {
-    try {
-        const { items, address, email } = req.body;
+  try {
+      const { items, address, email } = req.body;
 
-        console.log('Dados recebidos:', { items, address, email });
+      console.log('Dados recebidos:', { items, address, email });
 
-        // Verifique se 'items' está definido e é um array
-        if (!items || !Array.isArray(items)) {
-            throw new Error('Itens inválidos recebidos.');
-        }
+      // Verifique se 'items' está definido e é um array
+      if (!items || !Array.isArray(items)) {
+          throw new Error('Itens inválidos recebidos.');
+      }
 
-        // Criação da sessão de checkout no Stripe
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            mode: "payment",
-            success_url: `${DOMAIN}/success`,
-            cancel_url: `${DOMAIN}/checkout`,
-            line_items: items,
-        });
+      // Preparando os itens para a sessão de checkout do Stripe
+      const lineItems = items.map(item => ({
+          price_data: {
+              currency: 'brl',
+              product_data: {
+                  name: item.price_data.product_data.name,
+                  images: item.price_data.product_data.images || [],  // Certifique-se de que cada item tenha uma URL de imagem
+              },
+              unit_amount: item.price_data.unit_amount, // Preço em centavos
+          },
+          quantity: item.quantity,
+      }));
 
-        res.json({ url: session.url });
-    } catch (error) {
-        console.error("Erro ao criar sessão de checkout:", error.message);
-        res.status(500).json({ error: "Falha ao criar sessão de checkout", message: error.message });
-    }
+      // Criação da sessão de checkout no Stripe
+      const session = await stripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          mode: "payment",
+          success_url: `${DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}&order=${JSON.stringify(req.body.order)}`,
+          cancel_url: `${DOMAIN}/checkout`,
+          line_items: lineItems,  // Use o array 'lineItems' corretamente
+          customer_email: email // Adiciona o email do cliente à sessão
+      });
+
+      res.json({ url: session.url });
+  } catch (error) {
+      console.error("Erro ao criar sessão de checkout:", error.message);
+      res.status(500).json({ error: "Falha ao criar sessão de checkout", message: error.message });
+  }
 });
+
+
 
 
 // Rota 404

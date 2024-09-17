@@ -97,19 +97,24 @@ placeOrderBtn.addEventListener('click', async () => {
     let items = cartItems.map(item => {
         let priceStr = item.price ? item.price.replace('R$', '').replace(',', '').trim() : '0';
         let priceInCents = parseInt(priceStr) * 100;
-
+    
         if (isNaN(priceInCents)) {
             console.error('Preço inválido:', priceStr);
         }
-
-        return {
-            price_data: {
-                currency: 'brl',
-                product_data: {
-                    name: item.title,
-                },
-                unit_amount: priceInCents
+    
+        let productData = {
+            currency: 'brl',
+            product_data: {
+                name: item.title,
+                // Adicionar a imagem se existir
+                // Se a URL da imagem estiver faltando ou for inválida, o campo images não deve ser adicionado
+                images: item.image ? [item.image] : []
             },
+            unit_amount: priceInCents
+        };
+    
+        return {
+            price_data: productData,
             quantity: parseInt(item.quantity)
         };
     });

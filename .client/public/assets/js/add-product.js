@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log(`URL do S3 obtida: ${url}`);
                     fetch(url, {
                         method: 'PUT',
-                        headers: new Headers({'Content-Type': 'multipart/form-data'}),
+                        headers: new Headers({'Content-Type': 'image/jpeg'}),
                         body: file
                     }).then(res => {
                         imagePath = url.split("?")[0];
