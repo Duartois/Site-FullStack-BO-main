@@ -27,7 +27,7 @@ const db = getFirestore();
 const app = express();
 
 // Middlewares
-app.use(express.static("public"));
+app.use(express.static("../front-end/public"));
 app.use(express.json());
 
 // Configuração da AWS
@@ -70,12 +70,12 @@ app.get('/s3url', (req, res) => {
 
 // Home route
 app.get('/', (req, res) => {
-  res.sendFile("index.html", { root: "public" });
+  res.sendFile("index.html", { root: "../front-end/public" });
 });
 
 // Signup
 app.get('/signup', (req, res) => {
-  res.sendFile("register.html", { root: "public" });
+  res.sendFile("register.html", { root: "../front-end/public" });
 });
 
 app.post('/signup', (req, res) => {
@@ -122,12 +122,12 @@ app.post('/signup', (req, res) => {
 });
 // Category
 app.get('/Category', (req, res) => {
-  res.sendFile("category.html", { root: "public" });
+  res.sendFile("category.html", { root: "../front-end/public" });
 });
 
 // Login
 app.get('/login', (req, res) => {
-  res.sendFile("login.html", { root: "public" });
+  res.sendFile("login.html", { root: "../front-end/public" });
 });
 
 app.post('/login', (req, res) => {
@@ -163,7 +163,7 @@ app.post('/login', (req, res) => {
 
 // Rota para vendedores
 app.get('/seller', (req, res) => {
-  res.sendFile('seller.html', { root: "public" });
+  res.sendFile('seller.html', { root: "../front-end/public" });
 });
 
 app.post('/seller', (req, res) => {
@@ -189,16 +189,16 @@ app.post('/seller', (req, res) => {
 
 // Dashboard
 app.get('/dashboard', (req, res) => {
-  res.sendFile('dashboard.html', { root: "public" });
+  res.sendFile('dashboard.html', { root: "../front-end/public" });
 });
 
 // Adicionar produto
 app.get('/add-product', (req, res) => {
-  res.sendFile('add-product.html', { root: "public" });
+  res.sendFile('add-product.html', { root: "../front-end/public" });
 });
 
 app.get('/add-product/:id', (req, res) => {
-  res.sendFile('add-product.html', { root: "public" });
+  res.sendFile('add-product.html', { root: "../front-end/public" });
 });
 // Funções para calcular badges
 const isNewProduct = (createdDate) => {
@@ -341,12 +341,12 @@ app.post('/get-products', (req, res) => {
 
 // Rota para produtos
 app.get('/products/:id', (req, res) => {
-res.sendFile("product.html", { root: "public" });
+res.sendFile("product.html", { root: "../front-end/public" });
 });
 
 // Rota de busca
 app.get('/search/:key', (req, res) => {
-res.sendFile("search.html", { root: "public" });
+res.sendFile("search.html", { root: "../front-end/public" });
 });
 
 // Rota para deletar produtos
@@ -430,11 +430,11 @@ getDocs(query(reviews, where("product", "==", product)), limit(4))
 
 
 app.get('/cart', (req, res) => {
-  res.sendFile("cart.html", { root : "public" })
+  res.sendFile("cart.html", { root : "../front-end/public" })
 })
 
 app.get('/checkout', (req, res) => {
-  res.sendFile("checkout.html", { root : "public" })
+  res.sendFile("checkout.html", { root : "../front-end/public" })
 })
 
 const googleMapsClient = new Client({});
@@ -519,7 +519,7 @@ app.post('/stripe-checkout', async (req, res) => {
 
 // Rota 404
 app.get('/404', (req, res) => {
-  res.sendFile("404.html", { root: "public" });
+  res.sendFile("404.html", { root: "../front-end/public" });
 });
 
 // Rota padrão para 404
