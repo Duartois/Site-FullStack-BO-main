@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs';
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, collection, setDoc, getDoc, updateDoc, getDocs, query, where, deleteDoc, limit } from "firebase/firestore";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
