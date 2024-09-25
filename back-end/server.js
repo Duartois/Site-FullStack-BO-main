@@ -498,14 +498,14 @@ app.post('/stripe-checkout', async (req, res) => {
       }));
 
       // Criação da sessão de checkout no Stripe
-      const session = await stripe.checkout.sessions.create({
-          payment_method_types: ["card"],
-          mode: "payment",
-         success_url: `${DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${DOMAIN}/checkout`,
-          line_items: lineItems,  // Use o array 'lineItems' corretamente
-          customer_email: email // Adiciona o email do cliente à sessão
-      });
+     const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    mode: "payment",
+    line_items: lineItems,
+    customer_email: email,
+    success_url: `https://checkout.stripe.com/pay/${session.id}`,  // Usar a URL padrão do Stripe para sucesso
+    cancel_url: `${DOMAIN}/checkout`
+});
 
       res.json({ url: session.url });
   } catch (error) {
