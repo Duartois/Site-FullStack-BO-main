@@ -501,7 +501,7 @@ app.post('/stripe-checkout', async (req, res) => {
       const session = await stripe.checkout.sessions.create({
           payment_method_types: ["card"],
           mode: "payment",
-          success_url: `${DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}&order=${encodeURIComponent(JSON.stringify(req.body.order))}`,
+         success_url: `${DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${DOMAIN}/checkout`,
           line_items: lineItems,  // Use o array 'lineItems' corretamente
           customer_email: email // Adiciona o email do cliente à sessão
