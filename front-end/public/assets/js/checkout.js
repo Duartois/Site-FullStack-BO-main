@@ -39,7 +39,9 @@ const getAddress = () => {
 const storeAddress = "Rua Exemplo, Tatuapé, São Paulo"; // Endereço fixo da loja
 
 const calcularFretePorDistancia = async (cepDestino) => {
-    const clienteEndereco = `${cepDestino}, Brasil`;
+    const cepFormatado = cepDestino.replace(/\D/g, ''); // Remove tudo que não é dígito
+
+    const clienteEndereco = `${cepFormatado}, Brasil`;
 
     try {
         const response = await fetch('/calculate-distance', {
@@ -54,18 +56,19 @@ const calcularFretePorDistancia = async (cepDestino) => {
         const data = await response.json();
         
         if (data.distance) {
-            // Define o valor do frete baseado na distância (exemplo: R$ 1,50 por km)
-            const valorFrete = Math.max(600, Math.min(5000, data.distance * 150)); // R$6 a R$50
+            // Arredonda o valor do frete para garantir que seja um inteiro
+            const valorFrete = Math.round(Math.max(1100, Math.min(5500, data.distance * 150))); // Aumentado em R$5 no mínimo e máximo
             return valorFrete;
         } else {
             console.error('Erro ao calcular distância:', data.error);
-            return 1000; // Frete padrão em caso de erro
+            return 1500; // Frete padrão em caso de erro, aumentado para R$15,00
         }
     } catch (error) {
         console.error('Erro ao calcular o frete:', error);
-        return 1000; // Frete padrão em caso de erro
+        return 1500; // Frete padrão em caso de erro, aumentado para R$15,00
     }
 };
+
 
 // Modifique a função updateFreteValue para usar a nova função de cálculo de frete
 const updateFreteValue = async () => {
@@ -101,14 +104,19 @@ placeOrderBtn.addEventListener('click', async () => {
         if (isNaN(priceInCents)) {
             console.error('Preço inválido:', priceStr);
         }
-    
+
+        // Usando a propriedade productImg para pegar a URL da imagem
+        let imageUrl = item.productImg && item.productImg.startsWith('http') ? item.productImg : null;
+
+        // Log de depuração para verificar se a URL da imagem é válida
+        console.log(`Item: ${item.title}, Imagem: ${imageUrl}`);
+
         let productData = {
             currency: 'brl',
             product_data: {
                 name: item.title,
-                // Adicionar a imagem se existir
-                // Se a URL da imagem estiver faltando ou for inválida, o campo images não deve ser adicionado
-                images: item.image ? [item.image] : []
+                // Adiciona a imagem se a URL estiver presente e for válida
+                images: imageUrl ? [imageUrl] : [] // Corrigido para sempre passar um array
             },
             unit_amount: priceInCents
         };
@@ -128,6 +136,7 @@ placeOrderBtn.addEventListener('click', async () => {
             currency: 'brl',
             product_data: {
                 name: "Frete",
+                images: [] // Adicione a imagem do frete aqui se desejar
             },
             unit_amount: frete
         },
@@ -156,3 +165,7 @@ placeOrderBtn.addEventListener('click', async () => {
         console.error('Erro ao enviar dados para o backend:', error);
     }
 });
+
+
+
+

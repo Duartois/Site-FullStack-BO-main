@@ -38,6 +38,7 @@ const loadCartPageItems = () => {
 
     // Adiciona cada item do carrinho à tabela
     cartItems.forEach(item => {
+        console.log(`Carregando item: ${item.title}, Imagem: ${item.productImg}`); // Log de depuração
         const row = createCartRow(item);
         tableBody.innerHTML += row;
     });
@@ -105,9 +106,11 @@ const updateCartPageTotal = () => {
         const quantity = parseInt(item.quantity); // Converte a quantidade para número inteiro
         if (!isNaN(price) && !isNaN(quantity)) {
             total += price * quantity;
+        } else {
+            console.error(`Preço ou quantidade inválidos para o item: ${item.title}`);
         }
     });
-
+    
     // Atualiza o valor total na página
     const totalElement = document.querySelector('.total-price');
     if (totalElement) {
@@ -116,7 +119,6 @@ const updateCartPageTotal = () => {
         console.error("Elemento '.total-price' não encontrado!");
     }
 };
-
 
 // Executar ao carregar o documento
 document.addEventListener('DOMContentLoaded', () => {

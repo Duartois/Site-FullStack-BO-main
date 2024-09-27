@@ -2079,6 +2079,8 @@ text-align: center;
   margin: 0 auto 0 auto;
  }
  .tab__btns {
+    display: flex;
+    flex-wrap: nowrap;
   margin: 2rem;
  }
   #navbar.nav.container.bg {

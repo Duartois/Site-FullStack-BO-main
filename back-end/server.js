@@ -485,27 +485,32 @@ app.post('/stripe-checkout', async (req, res) => {
       }
 
       // Preparando os itens para a sessão de checkout do Stripe
-      const lineItems = items.map(item => ({
-          price_data: {
-              currency: 'brl',
-              product_data: {
-                  name: item.price_data.product_data.name,
-                  images: item.price_data.product_data.images || [],  // Certifique-se de que cada item tenha uma URL de imagem
+      const lineItems = items.map(item => {
+          console.log('Preparando item para checkout:', item); // Log do item atual
+          return {
+              price_data: {
+                  currency: 'brl',
+                  product_data: {
+                      name: item.price_data.product_data.name,
+                      images: item.price_data.product_data.images || [],  // Certifique-se de que cada item tenha uma URL de imagem
+                  },
+                  unit_amount: item.price_data.unit_amount, // Preço em centavos
               },
-              unit_amount: item.price_data.unit_amount, // Preço em centavos
-          },
-          quantity: item.quantity,
-      }));
+              quantity: item.quantity,
+          };
+      });
+
+      console.log('Line items preparados:', lineItems); // Log dos line items
 
       // Criação da sessão de checkout no Stripe
-     const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    mode: "payment",
-    line_items: lineItems,
-    customer_email: email,
-    success_url: `https://checkout.stripe.com/pay/${session.id}`,  // Usar a URL padrão do Stripe para sucesso
-    cancel_url: `${DOMAIN}/checkout`
-});
+      const session = await stripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          mode: "payment",
+          line_items: lineItems,
+          customer_email: email,
+          success_url: `${DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${DOMAIN}/checkout`
+      });
 
       res.json({ url: session.url });
   } catch (error) {
@@ -513,9 +518,10 @@ app.post('/stripe-checkout', async (req, res) => {
       res.status(500).json({ error: "Falha ao criar sessão de checkout", message: error.message });
   }
 });
-
-
-
+app.get('/success', (req, res) => {
+  console.log("Página de sucesso acessada com session_id:", req.query.session_id);
+  res.sendFile("success.html", { root: "../front-end/public" });
+});
 
 // Rota 404
 app.get('/404', (req, res) => {
